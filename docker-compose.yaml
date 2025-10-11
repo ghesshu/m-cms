@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: mechanico_strapi
-    env_file:
-      - .env
+    # env_file:
+    #   - .env
     ports:
       - "1337:1337"
     restart: unless-stopped
