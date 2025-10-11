@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mechanico_strapi
+    env_file:
+      - .env
+    ports:
+      - "1337:1337"
+    restart: unless-stopped
+    environment:
+      HOST: ${HOST}
+      PORT: ${PORT}
+      NODE_ENV: ${NODE_ENV:-development}
+    depends_on:
+      - db
+    volumes:
+      # Mount only uploads if you need persistence (optional)
+      - strapi_uploads:/opt/app/public/uploads
+
+  db:
+    image: postgres:15-alpine
+    container_name: mechanico_db
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "5896:5432"
+    environment:
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+  strapi_uploads:
