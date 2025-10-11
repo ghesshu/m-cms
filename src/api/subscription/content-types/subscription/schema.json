@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "subscriptions",
+  "info": {
+    "singularName": "subscription",
+    "pluralName": "subscriptions",
+    "displayName": "Subscription"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "stripeProductId": {
+      "type": "string"
+    },
+    "subscription_benefits": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::subscription-benefit.subscription-benefit"
+    },
+    "subscriptionType": {
+      "type": "enumeration",
+      "enum": [
+        "Trial",
+        "None",
+        "Basic",
+        "Standard",
+        "Enterprise"
+      ]
+    }
+  }
+}
