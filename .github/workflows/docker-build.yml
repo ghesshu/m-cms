@@ -5,6 +5,10 @@ on:
   push:
     branches: ["main"]
 
+permissions:
+  contents: read
+  packages: write   # 👈 REQUIRED for GHCR
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
